@@ -24,7 +24,7 @@ public class TankGame {
 		
 		init();
 		
-		Var.f = new JFrame("Tanks");
+		Var.f = new JFrame();
 		
 		Var.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Var.f.setBounds(0, 0, Var.FrameWidth, Var.FrameHeight);
