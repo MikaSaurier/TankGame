@@ -30,6 +30,20 @@ public class Keys implements KeyListener{
 			Var.p2.shoot();
 		}if(k == KeyEvent.VK_ESCAPE) {
 			System.exit(0);
+		}if(k == KeyEvent.VK_F) {
+			Misc.toggleFullScreen();
+		}if(k == KeyEvent.VK_PLUS) {
+			if(!Var.fullScreen && Var.f.getWidth()>=256 && Var.f.getHeight() >=144) {
+				Var.f.setSize((int)(Var.f.getWidth()+64), (int)(Var.f.getHeight()+36));
+				Misc.changeScale(Var.f.getWidth(), Var.f.getHeight());
+	            Var.f.setLocationRelativeTo(null);
+			}
+		}if(k == KeyEvent.VK_MINUS) {
+			if(!Var.fullScreen && Var.f.getWidth()>=256 && Var.f.getHeight() >=144) {
+				Var.f.setSize((int)(Var.f.getWidth()-64), (int)(Var.f.getHeight()-36));
+				Misc.changeScale(Var.f.getWidth(), Var.f.getHeight());
+	            Var.f.setLocationRelativeTo(null);
+			}
 		}
 	}
 

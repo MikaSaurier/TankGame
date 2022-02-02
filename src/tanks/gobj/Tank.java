@@ -72,11 +72,10 @@ public class Tank {
 		tmpColor = g.getColor();
 		g.setColor(color);
 		g.drawString(name, x, y-width/10);
-		//g.fillRect(x, y, width, height);
-		if(xPoints.length > 0 && yPoints.length > 0) {
-			g.drawPolyline(xPoints, yPoints, xPoints.length);
-		}
-		
+		g.fillRect(x, y, width, height);
+//		if(xPoints.length > 0 && yPoints.length > 0) {
+//			g.drawPolyline(xPoints, yPoints, xPoints.length);
+//		}
 		g.setColor(tmpColor);
 	}
 
