@@ -1,4 +1,4 @@
-//Tank Game
+//Tank Game in early state
 package tanks.main;
 
 import java.awt.Color;
