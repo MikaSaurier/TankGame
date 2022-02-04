@@ -13,9 +13,7 @@ import javax.swing.JFrame;
 import tanks.core.Keys;
 import tanks.core.Misc;
 import tanks.core.MoveMouseListener;
-import tanks.core.Movement;
 import tanks.core.Var;
-import tanks.gobj.FPSCounter;
 import tanks.gobj.Tank;
 
 public class TankGame {
@@ -59,10 +57,9 @@ public class TankGame {
 		Var.FrameWidth = 1600;
 		Var.FrameHeight = 900;
 		
-		Var.fps = 60;
+		Var.sPerFrame = 1.0 / 120.0;
 		Var.p1 = new Tank("Ernie", 250, 50, 50, 50, Color.BLUE);
 		Var.p2 = new Tank("Bernd", 500, 50, 50, 50, Color.RED);
-		Var.FPSCount = new FPSCounter(20, 25);
 		
 		try {
 			Var.pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("res/coders_crux.ttf")).deriveFont(125f);
@@ -78,7 +75,7 @@ public class TankGame {
 		
 		Var.gamepanel.getRenderables().add(Var.p2);
 		Var.gamepanel.getRenderables().add(Var.p1);
-		Var.gamepanel.getRenderables().add(Var.FPSCount);
+		//Var.gamepanel.getRenderables().add(Var.FPSCount);
 	}
 
 }

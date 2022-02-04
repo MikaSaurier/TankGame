@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import tanks.gobj.Bullet;
-import tanks.gobj.FPSCounter;
 import tanks.gobj.Tank;
 import tanks.main.GamePanel;
 
@@ -26,8 +25,7 @@ public class Var {
 	
 	public static boolean P1MoveUP, P1MoveDOWN, P1MoveLEFT, P1MoveRIGHT;
 	public static boolean P2MoveUP, P2MoveDOWN, P2MoveLEFT, P2MoveRIGHT;
-	public static FPSCounter FPSCount;
-	public static int fps;
+	public static double sPerFrame;
 	public static double SleptDiff = 0;
 	
 	

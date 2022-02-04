@@ -22,8 +22,8 @@ public class Bullet implements Renderable {
 	
 	public Bullet(Tank origin, int radius, double speed, int maxColls) {
 		double angle = origin.getAngle();
-		this.dx = 100 * speed * Math.cos(angle);
-		this.dy = 100 * speed * Math.sin(angle);
+		this.dx = 200 * speed * Math.cos(angle);
+		this.dy = 200 * speed * Math.sin(angle);
 		//       (      center of origin                ) + ( half of with to get outside of player   )
 		this.x = (origin.getX() + origin.getWidth() / 2 ) + (origin.getWidth() * 0.5 * Math.cos(angle))  - radius;
 		this.y = (origin.getY() + origin.getHeight() / 2) + (origin.getHeight() * 0.5 * Math.sin(angle)) - radius;
