@@ -5,6 +5,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.util.zip.InflaterInputStream;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -34,6 +36,7 @@ public class MoveMouseListener implements MouseListener, MouseMotionListener{
 	  }
 
 	  public void mouseClicked(MouseEvent e) {
+		  Misc.AACFastPlay("res/click.m4a", 50);
 	  }
 
 	  public void mouseEntered(MouseEvent e) {

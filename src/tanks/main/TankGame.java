@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 import tanks.core.Keys;
+import tanks.core.Misc;
 import tanks.core.MoveMouseListener;
 import tanks.core.Movement;
 import tanks.core.Var;
@@ -45,6 +46,8 @@ public class TankGame {
 		MoveMouseListener mml = new MoveMouseListener(Var.gamepanel);
 		Var.f.addMouseListener(mml);
 		Var.f.addMouseMotionListener(mml);
+		
+		Misc.AACFastPlay("res/TanksMusic.m4a", 10);
 		
 		System.out.println("Finished after " + (System.currentTimeMillis()-time) + " ms");
 		

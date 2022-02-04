@@ -8,6 +8,36 @@ public class Misc {
 
 	private static boolean toggleFullScreenWait;
 	
+	public static void AACFastPlay(String in, float vol) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				AACPlayer player = new AACPlayer(in, vol);
+				try {
+					player.play();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		t.start();
+	}
+	
+	public static void AACFastPlay(String in) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				AACPlayer player = new AACPlayer(in);
+				try {
+					player.play();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		t.start();
+	}
+	
 	public static void sleeping(int ms) {
 		try{Thread.sleep(ms);}catch(InterruptedException e){e.printStackTrace();}
 	}
