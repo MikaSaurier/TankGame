@@ -2,7 +2,9 @@ package tanks.gobj;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 
 import tanks.core.Var;
 
@@ -64,24 +66,21 @@ public class Tank implements Renderable {
     	return angle;
     }
     
-    public void setAngle(double angle) {
-		this.angle = angle;
-	}
+    public void rotate(double angle) {
+    	this.angle += angle;
+    }
+    
+    public void move(double val) {
+    	this.x += Math.cos(angle) * val;
+    	this.y += Math.sin(angle) * val;
+    }
     
 	public int getX() {
 		return (int) x;
 	}
 
-	public void incX(double dx) {
-		this.x += dx;
-	}
-
 	public int getY() {
 		return (int) y;
-	}
-
-	public void incY(double dy) {
-		this.y += dy;
 	}
 
 	public Color getColor() {
@@ -96,8 +95,13 @@ public class Tank implements Renderable {
 		tmpColor = g.getColor();
 		g.setColor(color);
 		g.drawString(name, (int) x, (int) y - width/10);
-		g.fillRect((int) x, (int) y, width, height);
 		//angle = (angle + 0.001) % (Math.PI * 2);
+		Graphics2D g2d = (Graphics2D)g;
+		AffineTransform old = g2d.getTransform();
+		g2d.rotate(angle, (int) x + width/2, (int) y + height/2);
+		g.fillRect((int) x, (int) y, width, height);
+		g2d.setTransform(old);
+
 		g.drawLine(
 				(int) x + width/2, 
 				(int) y + height/2,

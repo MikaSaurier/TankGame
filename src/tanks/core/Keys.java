@@ -48,14 +48,6 @@ public class Keys implements KeyListener{
 	            Var.f.setLocationRelativeTo(null);
 	            Var.didScreenChange = true;
 			}
-		}if(k == KeyEvent.VK_Q) {
-			Var.p1.setAngle(Var.p1.getAngle() - 0.05);
-		}if(k == KeyEvent.VK_E) {
-			Var.p1.setAngle(Var.p1.getAngle() + 0.05);
-		}if(k == KeyEvent.VK_U) {
-			Var.p2.setAngle(Var.p2.getAngle() - 0.05);
-		}if(k == KeyEvent.VK_O) {
-			Var.p2.setAngle(Var.p2.getAngle() + 0.05);
 		}if(k == KeyEvent.VK_B) {
 			Var.showBounds = true;
 		}

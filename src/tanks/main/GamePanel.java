@@ -92,7 +92,7 @@ public class GamePanel extends JPanel {
 			newBounds.add(bullet.getBounds());
 		}
         
-        if (Var.didScreenChange) {
+        if (true || Var.didScreenChange) {
 			repaint();
 			Var.didScreenChange = false;
 		} else {
@@ -116,23 +116,23 @@ public class GamePanel extends JPanel {
 	
 	private void move(double delta) {
 		if(Var.P1MoveUP) {
-			Var.p1.incY(-100 * delta);
+			Var.p1.move(+100 * delta);
 		} if(Var.P1MoveDOWN) {
-			Var.p1.incY(+100 * delta);
+			Var.p1.move(-100 * delta);
 		} if(Var.P1MoveLEFT) {
-			Var.p1.incX(-100 * delta);
+			Var.p1.rotate(-0.5 * delta);
 		} if(Var.P1MoveRIGHT) {
-			Var.p1.incX(+100 * delta);
+			Var.p1.rotate(+0.5 * delta);
 		}
 		
 		if(Var.P2MoveUP) {
-			Var.p2.incY(-100 * delta);
+			Var.p2.move(-100 * delta);
 		} if(Var.P2MoveDOWN) {
-			Var.p2.incY(+100 * delta);
+			Var.p2.move(+100 * delta);
 		} if(Var.P2MoveLEFT) {
-			Var.p2.incX(-100 * delta);
+			Var.p2.rotate(-0.5 * delta);
 		} if(Var.P2MoveRIGHT) {
-			Var.p2.incX(+100 * delta);
+			Var.p2.rotate(+0.5 * delta);
 		}
 		
 		Bullet[] bullets = Var.bullets.toArray(new Bullet[0]);
