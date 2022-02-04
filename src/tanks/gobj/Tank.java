@@ -95,8 +95,8 @@ public class Tank implements Renderable {
     }
     
     public void move(double val) {
-    	this.x += Math.cos(angle) * val;
-    	this.y += Math.sin(angle) * val;
+    	this.x = Math.max(0, Math.min(this.x + Math.cos(angle) * val, Var.FrameWidth - this.width));
+    	this.y = Math.max(0, Math.min(this.y + Math.sin(angle) * val, Var.FrameHeight - this.height));
     }
     
 	public int getX() {
