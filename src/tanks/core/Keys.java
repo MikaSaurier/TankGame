@@ -32,13 +32,13 @@ public class Keys implements KeyListener{
 			System.exit(0);
 		}if(k == KeyEvent.VK_F) {
 			Misc.toggleFullScreen();
-		}if(k == KeyEvent.VK_PLUS) {
+		}if(k == KeyEvent.VK_PLUS || k == 93) {
 			if(!Var.fullScreen && Var.f.getWidth()>=256 && Var.f.getHeight() >=144) {
 				Var.f.setSize((int)(Var.f.getWidth()+64), (int)(Var.f.getHeight()+36));
 				Misc.changeScale(Var.f.getWidth(), Var.f.getHeight());
 	            Var.f.setLocationRelativeTo(null);
 			}
-		}if(k == KeyEvent.VK_MINUS) {
+		}if(k == KeyEvent.VK_MINUS || k == 47) {
 			if(!Var.fullScreen && Var.f.getWidth()>=256 && Var.f.getHeight() >=144) {
 				Var.f.setSize((int)(Var.f.getWidth()-64), (int)(Var.f.getHeight()-36));
 				Misc.changeScale(Var.f.getWidth(), Var.f.getHeight());

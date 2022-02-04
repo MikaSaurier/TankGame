@@ -3,6 +3,8 @@ package tanks.core;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import tanks.gobj.Bullet;
+
 public class Movement {
 
 	private static Timer move;
@@ -28,6 +30,13 @@ public class Movement {
 					Var.p2.setX(Var.p2.getX()-1);
 				}if(Var.P2MoveRIGHT) {
 					Var.p2.setX(Var.p2.getX()+1);
+				}
+				
+				Bullet[] bullets = Var.bullets.toArray(new Bullet[0]);
+				for (Bullet bullet : bullets) {
+					if (! bullet.move(Var.p1, Var.p2)) {
+						Var.bullets.remove(bullet);
+					}
 				}
 			}
 		}, 0, 6);

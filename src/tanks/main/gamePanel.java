@@ -42,7 +42,7 @@ public class gamePanel extends JPanel{
         
         Var.FPSCount.tick();
         repaint();
-        
+        /*
         delta = System.nanoTime() - m;
         delta = delta/1_000_000.0;
         if((int) (Misc.FPStoMS(Var.fps) - delta) > 0) {
@@ -54,7 +54,7 @@ public class gamePanel extends JPanel{
             	Var.SleptDiff = sleepingTime - slept;
         	}
         }
-        
+        */
 	}
 	
 }
