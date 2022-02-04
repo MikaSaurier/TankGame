@@ -2,7 +2,7 @@ package tanks.core;
 
 import java.awt.Toolkit;
 
-import tanks.main.gamePanel;
+import tanks.main.GamePanel;
 
 public class Misc {
 
@@ -12,13 +12,15 @@ public class Misc {
 		try{Thread.sleep(ms);}catch(InterruptedException e){e.printStackTrace();}
 	}
 	
-	public static double FPStoMS(int FPS){return 1000.0/(double)FPS;}
+	public static double FPStoMS(int FPS) {
+		return 1000.0/(double)FPS;
+	}
 	
 	public static void changeScale(int Width, int Height) {
-		if((double)Width/Var.FrameWidth>(double)Var.FrameHeight/720) {
-			gamePanel.s = (double)Height/Var.FrameHeight;
+		if ((double) Width / Var.FrameWidth > (double) Var.FrameHeight / 720) {
+			GamePanel.s = (double) Height / Var.FrameHeight;
 		}else {
-			gamePanel.s = (double)Width/Var.FrameWidth;
+			GamePanel.s = (double) Width / Var.FrameWidth;
 		}
 	}
 	
@@ -33,6 +35,7 @@ public class Misc {
 				Var.f.setSize(Var.FrameWidth_Cache, Var.FrameHeight_Cache);
 				Var.f.setLocationRelativeTo(null);
 				changeScale(Var.f.getWidth(), Var.f.getHeight());
+				Var.didScreenChange = true;
 			}else {
 				Var.fullScreen = true;
 				Var.FrameWidth_Cache = Var.f.getWidth();
@@ -43,6 +46,7 @@ public class Misc {
 				Var.f.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 				Var.f.setLocation(0, 0);
 				changeScale(Var.f.getWidth(), Var.f.getHeight());
+				Var.didScreenChange = true;
 			}
 			Thread t = new Thread(new Runnable() {
 				@Override

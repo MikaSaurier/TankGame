@@ -43,22 +43,26 @@ public class MoveMouseListener implements MouseListener, MouseMotionListener{
 	  }
 
 	  public void mousePressed(MouseEvent e) {
-	    this.start_drag = this.getScreenLocation(e);
-	    this.start_loc = this.getFrame(this.target).getLocation();
+		  if(!Var.fullScreen) {
+			  this.start_drag = this.getScreenLocation(e);
+			  this.start_loc = this.getFrame(this.target).getLocation();
+		  }
 	  }
 
 	  public void mouseReleased(MouseEvent e) {
 	  }
 
 	  public void mouseDragged(MouseEvent e) {
-	    Point current = this.getScreenLocation(e);
-	    Point offset = new Point((int) current.getX() - (int) start_drag.getX(),
-	        (int) current.getY() - (int) start_drag.getY());
-	    JFrame frame = this.getFrame(target);
-	    Point new_location = new Point(
-	        (int) (this.start_loc.getX() + offset.getX()), (int) (this.start_loc
-	            .getY() + offset.getY()));
-	    frame.setLocation(new_location);
+		  if(!Var.fullScreen) {
+			  Point current = this.getScreenLocation(e);
+			    Point offset = new Point((int) current.getX() - (int) start_drag.getX(),
+			        (int) current.getY() - (int) start_drag.getY());
+			    JFrame frame = this.getFrame(target);
+			    Point new_location = new Point(
+			        (int) (this.start_loc.getX() + offset.getX()), (int) (this.start_loc
+			            .getY() + offset.getY()));
+			    frame.setLocation(new_location);
+		  }
 	  }
 
 	  public void mouseMoved(MouseEvent e) {

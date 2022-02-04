@@ -35,14 +35,18 @@ public class Keys implements KeyListener{
 		}if(k == KeyEvent.VK_PLUS || k == 93) {
 			if(!Var.fullScreen && Var.f.getWidth()>=256 && Var.f.getHeight() >=144) {
 				Var.f.setSize((int)(Var.f.getWidth()+64), (int)(Var.f.getHeight()+36));
+				//Var.gamepanel.setSize(Var.f.getWidth(), Var.f.getHeight());
 				Misc.changeScale(Var.f.getWidth(), Var.f.getHeight());
 	            Var.f.setLocationRelativeTo(null);
+	            Var.didScreenChange = true;
 			}
 		}if(k == KeyEvent.VK_MINUS || k == 47) {
 			if(!Var.fullScreen && Var.f.getWidth()>=256 && Var.f.getHeight() >=144) {
 				Var.f.setSize((int)(Var.f.getWidth()-64), (int)(Var.f.getHeight()-36));
+				//Var.gamepanel.setSize(Var.f.getWidth(), Var.f.getHeight());
 				Misc.changeScale(Var.f.getWidth(), Var.f.getHeight());
 	            Var.f.setLocationRelativeTo(null);
+	            Var.didScreenChange = true;
 			}
 		}if(k == KeyEvent.VK_Q) {
 			Var.p1.setAngle(Var.p1.getAngle() - 0.05);
@@ -52,6 +56,8 @@ public class Keys implements KeyListener{
 			Var.p2.setAngle(Var.p2.getAngle() - 0.05);
 		}if(k == KeyEvent.VK_O) {
 			Var.p2.setAngle(Var.p2.getAngle() + 0.05);
+		}if(k == KeyEvent.VK_B) {
+			Var.showBounds = true;
 		}
 	}
 
@@ -74,12 +80,14 @@ public class Keys implements KeyListener{
 			Var.P2MoveDOWN = false;
 		}if(k == KeyEvent.VK_L) {
 			Var.P2MoveRIGHT = false;
+		}if(k == KeyEvent.VK_B) {
+			Var.showBounds = false;
 		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		int k = e.getKeyCode();
+		//int k = e.getKeyCode();
 	}
 
 }

@@ -4,11 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.List;
 
 import tanks.core.Var;
 
-public class Bullet {
+public class Bullet implements Renderable {
 
 	private int radius;
 	private double x, y, speed, dx, dy;
@@ -23,8 +22,8 @@ public class Bullet {
 	
 	public Bullet(Tank origin, int radius, double speed, int maxColls) {
 		double angle = origin.getAngle();
-		dx = speed * Math.cos(angle);
-		dy = speed * Math.sin(angle);
+		this.dx = 100 * speed * Math.cos(angle);
+		this.dy = 100 * speed * Math.sin(angle);
 		//       (      center of origin                ) + ( half of with to get outside of player   )
 		this.x = (origin.getX() + origin.getWidth() / 2 ) + (origin.getWidth() * 0.5 * Math.cos(angle))  - radius;
 		this.y = (origin.getY() + origin.getHeight() / 2) + (origin.getHeight() * 0.5 * Math.sin(angle)) - radius;
@@ -62,16 +61,17 @@ public class Bullet {
 		return new Rectangle((int) x, (int) y, radius * 2, radius * 2);
 	}
 	
-	public boolean move(Tank... tanks) {
+	public boolean move(double delta, Tank... tanks) {
 		if (dead) return false;
 		if (spawnTime + ttl < System.nanoTime()) {
 			return false; // lived too long
 		}
+		// move
+		this.x += dx * delta;
+		this.y += dy * delta;
 		// check collision with window bounds
-		this.x += dx * speed;
-		this.y += dy * speed;
 		boolean collidesX = x < 0 || x + radius * 2 > Var.FrameWidth;
-		boolean collidesY = y < 0 || y + radius * 2> Var.FrameHeight;
+		boolean collidesY = y < 0 || y + radius * 2 > Var.FrameHeight;
 		if (collidesX || collidesY) {
 			if (this.collCount < this.maxColls) {
 				if (collidesX) {

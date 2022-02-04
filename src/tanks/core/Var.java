@@ -9,16 +9,17 @@ import javax.swing.JPanel;
 import tanks.gobj.Bullet;
 import tanks.gobj.FPSCounter;
 import tanks.gobj.Tank;
+import tanks.main.GamePanel;
 
 public class Var {
 
 	public static JFrame f;
-	public static JPanel gamepanel;
+	public static GamePanel gamepanel;
 	
 	public static Font pixelFont;
 	
 	public static int FrameWidth, FrameHeight, FrameWidth_Cache, FrameHeight_Cache;
-	public static boolean fullScreen;
+	public static boolean fullScreen, showBounds, didScreenChange;
 	
 	public static Tank p1, p2;
 	public static ArrayList<Bullet> bullets = new ArrayList<Bullet>();

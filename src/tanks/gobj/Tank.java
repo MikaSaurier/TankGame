@@ -6,11 +6,11 @@ import java.awt.Rectangle;
 
 import tanks.core.Var;
 
-public class Tank {
+public class Tank implements Renderable {
 
 	private String name;
-	private int x, y, width, height;
-	private double angle;
+	private int width, height;
+	private double x, y, angle;
 	private Color color, tmpColor;
 	private long lastShot = 0;
 	
@@ -25,7 +25,7 @@ public class Tank {
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, width, height);
+		return new Rectangle((int) x, (int)y, width, height);
 	}
 	
 	public void shoot() {
@@ -69,19 +69,19 @@ public class Tank {
 	}
     
 	public int getX() {
-		return x;
+		return (int) x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void incX(double dx) {
+		this.x += dx;
 	}
 
 	public int getY() {
-		return y;
+		return (int) y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void incY(double dy) {
+		this.y += dy;
 	}
 
 	public Color getColor() {
@@ -95,12 +95,12 @@ public class Tank {
 	public void render(Graphics g) {
 		tmpColor = g.getColor();
 		g.setColor(color);
-		g.drawString(name, x, y-width/10);
-		g.fillRect(x, y, width, height);
+		g.drawString(name, (int) x, (int) y - width/10);
+		g.fillRect((int) x, (int) y, width, height);
 		//angle = (angle + 0.001) % (Math.PI * 2);
 		g.drawLine(
-				x+width/2, 
-				y+height/2,
+				(int) x + width/2, 
+				(int) y + height/2,
 				(int) (x + width / 2 + 2 * Math.max(width, height) * 0.5 * (Math.cos(angle))), 
 				(int) (y + height / 2 + 2 * Math.max(width, height) * 0.5 * (Math.sin(angle)))
 			);

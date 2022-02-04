@@ -39,10 +39,6 @@ public class TankGame {
 		Var.f.setUndecorated(true);
 		Var.f.setVisible(true);
 		Var.f.setLayout(null);
-		
-		Var.gamepanel = new gamePanel();
-		Var.gamepanel.setVisible(true);
-		Var.gamepanel.setBounds(0, 0, Var.FrameWidth, Var.FrameHeight);
 		Var.f.add(Var.gamepanel);
 		Var.f.setContentPane(Var.gamepanel);
 		
@@ -56,13 +52,15 @@ public class TankGame {
 
 	private static void init() {
 		System.out.println("Init");
-		Var.FrameWidth = 1280;
-		Var.FrameHeight = 720;
+		
+		Var.FrameWidth = 1600;
+		Var.FrameHeight = 900;
+		
 		Var.fps = 60;
 		Var.p1 = new Tank("Ernie", 250, 50, 50, 50, Color.BLUE);
 		Var.p2 = new Tank("Bernd", 500, 50, 50, 50, Color.RED);
 		Var.FPSCount = new FPSCounter(20, 25);
-		Movement.init();
+		
 		try {
 			Var.pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("res/coders_crux.ttf")).deriveFont(125f);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -70,6 +68,14 @@ public class TankGame {
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 		}
+		
+		Var.gamepanel = new GamePanel();
+		Var.gamepanel.setVisible(true);
+		Var.gamepanel.setBounds(0, 0, Var.FrameWidth, Var.FrameHeight);
+		
+		Var.gamepanel.getRenderables().add(Var.p2);
+		Var.gamepanel.getRenderables().add(Var.p1);
+		Var.gamepanel.getRenderables().add(Var.FPSCount);
 	}
 
 }

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class FPSCounter {
+public class FPSCounter implements Renderable {
 
 	private int FPS = 0, FPSCache = 0, x, y;
 	private String Prefix = "";
