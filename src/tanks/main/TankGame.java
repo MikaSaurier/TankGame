@@ -59,8 +59,8 @@ public class TankGame {
 		Var.FrameWidth = 1280;
 		Var.FrameHeight = 720;
 		Var.fps = 60;
-		Var.p1 = new Tank("Ernie", 250, 50, 50, 50, Color.WHITE);
-		Var.p2 = new Tank("Bernd", 500, 50, 50, 50, Color.WHITE);
+		Var.p1 = new Tank("Ernie", 250, 50, 50, 50, Color.BLUE);
+		Var.p2 = new Tank("Bernd", 500, 50, 50, 50, Color.RED);
 		Var.FPSCount = new FPSCounter(20, 25);
 		Movement.init();
 		try {

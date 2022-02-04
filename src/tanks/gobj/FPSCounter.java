@@ -2,6 +2,7 @@ package tanks.gobj;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class FPSCounter {
 
@@ -28,6 +29,10 @@ public class FPSCounter {
 			}
 		});
 		t.start();
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle((int) x, (int) y, 50, 25);
 	}
 	
 	public int getX() {

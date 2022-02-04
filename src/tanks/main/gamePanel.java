@@ -3,6 +3,7 @@ package tanks.main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
@@ -50,7 +51,23 @@ public class gamePanel extends JPanel{
         Var.FPSCount.render(g);
         
         Var.FPSCount.tick();
-        repaint();
+        
+        
+        
+        if(bullets.length > 0) {
+        	for (int i = 0; i < bullets.length; i++) {
+    			repaint(new Rectangle(bullets[i].getBounds().x-bullets[i].getBounds().width/2,
+    					bullets[i].getBounds().y-bullets[i].getBounds().height/2,
+    					bullets[i].getBounds().width*2,
+    					bullets[i].getBounds().height*2
+    					));
+    			repaint(Var.p1.getBounds());
+    			repaint(Var.p2.getBounds());
+    			repaint(Var.FPSCount.getBounds());
+    		}
+        }else {
+        	repaint();
+        }
         
         
         /*

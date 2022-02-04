@@ -24,9 +24,9 @@ public class Keys implements KeyListener{
 			Var.P2MoveDOWN = true;
 		}if(k == KeyEvent.VK_L) {
 			Var.P2MoveRIGHT = true;
-		}if(k == KeyEvent.VK_E) {
+		}if(k == KeyEvent.VK_C) {
 			Var.p1.shoot();
-		}if(k == KeyEvent.VK_U) {
+		}if(k == KeyEvent.VK_N) {
 			Var.p2.shoot();
 		}if(k == KeyEvent.VK_ESCAPE) {
 			System.exit(0);
@@ -44,6 +44,14 @@ public class Keys implements KeyListener{
 				Misc.changeScale(Var.f.getWidth(), Var.f.getHeight());
 	            Var.f.setLocationRelativeTo(null);
 			}
+		}if(k == KeyEvent.VK_Q) {
+			Var.p1.setAngle(Var.p1.getAngle() - 0.05);
+		}if(k == KeyEvent.VK_E) {
+			Var.p1.setAngle(Var.p1.getAngle() + 0.05);
+		}if(k == KeyEvent.VK_U) {
+			Var.p2.setAngle(Var.p2.getAngle() - 0.05);
+		}if(k == KeyEvent.VK_O) {
+			Var.p2.setAngle(Var.p2.getAngle() + 0.05);
 		}
 	}
 

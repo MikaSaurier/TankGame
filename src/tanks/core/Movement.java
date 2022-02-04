@@ -33,7 +33,6 @@ public class Movement {
 				}
 				
 				Bullet[] bullets = Var.bullets.toArray(new Bullet[0]);
-				//System.out.println("rendering " + bullets.length + " bullets");
 				for (Bullet bullet : bullets) {
 					if (! bullet.move(Var.p1, Var.p2)) {
 						Var.bullets.remove(bullet);

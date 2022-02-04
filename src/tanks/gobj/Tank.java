@@ -10,6 +10,27 @@ public class Tank {
 
 	private String name;
 	private int x, y, width, height;
+	private double angle;
+	private Color color, tmpColor;
+	
+	public Tank(String name, int x, int y, int width, int height, Color color) {
+		this.name = name;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.color = color;
+		this.angle = 0;
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, width, height);
+	}
+	
+	public void shoot() {
+		Var.bullets.add(new Bullet(this, 10, 10, 2, 10));
+	}
+	
 	public int getHeight() {
 		return height;
 	}
@@ -25,40 +46,6 @@ public class Tank {
 	public void setWidth(int width) {
 		this.width = width;
 	}
-
-	private double angle;
-	private Color color, tmpColor;
-	private int[] xPoints = {0,0};
-	private int[] yPoints = {0,0};
-	private int xPoly[] = {150, 250, 325, 375, 450, 275, 100};
-	private int yPoly[] = {150, 100, 125, 225, 250, 375, 300};
-	
-	public Tank(String name, int x, int y, int width, int height, Color color) {
-		this.name = name;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.color = color;
-		this.angle = 0;
-		updatePos();
-	}
-	
-	public Rectangle getBounds() {
-		return new Rectangle(x, y, width, height);
-	}
-	
-	public void shoot() {
-		//System.out.println("Tank " + name + " shooting");
-		Var.bullets.add(new Bullet(this, 10, 10, 1));
-	}
-	
-	private void updatePos() {
-		xPoints[0] = x;
-		xPoints[1] = x+width;
-		yPoints[0] = y;
-		yPoints[1] = y+height;
-	}
 	
 	public String getName() {
 		return name;
@@ -71,14 +58,17 @@ public class Tank {
     public double getAngle() {
     	return angle;
     }
-
+    
+    public void setAngle(double angle) {
+		this.angle = angle;
+	}
+    
 	public int getX() {
 		return x;
 	}
 
 	public void setX(int x) {
 		this.x = x;
-		updatePos();
 	}
 
 	public int getY() {
@@ -87,7 +77,6 @@ public class Tank {
 
 	public void setY(int y) {
 		this.y = y;
-		updatePos();
 	}
 
 	public Color getColor() {
@@ -103,7 +92,7 @@ public class Tank {
 		g.setColor(color);
 		g.drawString(name, x, y-width/10);
 		g.fillRect(x, y, width, height);
-		angle = (angle + 0.001) % (Math.PI * 2);
+		//angle = (angle + 0.001) % (Math.PI * 2);
 		g.drawLine(
 				x+width/2, 
 				y+height/2,
