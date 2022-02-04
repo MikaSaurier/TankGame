@@ -49,8 +49,8 @@ public class Tank {
 	}
 	
 	public void shoot() {
-		System.out.println("Tank " + name + " shooting");
-		Var.bullets.add(new Bullet(this, 10, 10, 1, 0)); //TODO: change angle
+		//System.out.println("Tank " + name + " shooting");
+		Var.bullets.add(new Bullet(this, 10, 10, 1));
 	}
 	
 	private void updatePos() {
@@ -103,12 +103,12 @@ public class Tank {
 		g.setColor(color);
 		g.drawString(name, x, y-width/10);
 		g.fillRect(x, y, width, height);
-		angle += 0.001;
+		angle = (angle + 0.001) % (Math.PI * 2);
 		g.drawLine(
 				x+width/2, 
 				y+height/2,
-				(int) (x + width / 2 + 2 * 40 * (Math.cos(angle))), 
-				(int) (y + height / 2 + 2 * 40 * (Math.sin(angle)))
+				(int) (x + width / 2 + 2 * Math.max(width, height) * 0.5 * (Math.cos(angle))), 
+				(int) (y + height / 2 + 2 * Math.max(width, height) * 0.5 * (Math.sin(angle)))
 			);
 		/*g.fillArc(
 				(int) (Var.g1.getCoordX(pnow.x)+10*(Math.cos((angel-165)*Math.PI/180))), 

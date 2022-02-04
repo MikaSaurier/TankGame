@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import tanks.core.Misc;
 import tanks.core.Var;
+import tanks.gobj.Bullet;
 
 public class gamePanel extends JPanel{
 
@@ -31,17 +32,27 @@ public class gamePanel extends JPanel{
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
+        g.setColor(Color.WHITE);
+        
         g2.scale(s, s);
-        g.setColor(Color.BLACK);
+       
         g.setFont(Var.getModifiedFont(Var.pixelFont, 24));
-        g.drawString("Test", 100, 100);
+        g.drawString("Bullets: " + Var.bullets.size(), 20, 75);
         
         Var.p1.render(g);
         Var.p2.render(g);
+        
+        Bullet[] bullets = Var.bullets.toArray(new Bullet[0]);
+		for (Bullet bullet : bullets) {
+			bullet.render(g);
+		}
+        
         Var.FPSCount.render(g);
         
         Var.FPSCount.tick();
         repaint();
+        
+        
         /*
         delta = System.nanoTime() - m;
         delta = delta/1_000_000.0;
