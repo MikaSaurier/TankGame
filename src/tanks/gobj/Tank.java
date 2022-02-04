@@ -12,6 +12,7 @@ public class Tank {
 	private int x, y, width, height;
 	private double angle;
 	private Color color, tmpColor;
+	private long lastShot = 0;
 	
 	public Tank(String name, int x, int y, int width, int height, Color color) {
 		this.name = name;
@@ -28,7 +29,11 @@ public class Tank {
 	}
 	
 	public void shoot() {
-		Var.bullets.add(new Bullet(this, 10, 10, 2, 10));
+		// every 100ms
+		if (lastShot + 100_000_000 < System.nanoTime()) {
+			Var.bullets.add(new Bullet(this, 5, 2, 3));
+			lastShot = System.nanoTime();
+		}
 	}
 	
 	public int getHeight() {

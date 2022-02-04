@@ -54,7 +54,12 @@ public class gamePanel extends JPanel{
         
         
         
-        if(bullets.length > 0) {
+        if(false && bullets.length > 0) {
+        	/* Das hier klappt nicht, weil sich die Sachen manchmal zwischen 
+        	 * zwei paints verschieben, dann wird das nicht richtig geupdatet
+        	 * Dann gibt es Grafik-Bugs, man müsste die alten Bounds vom letzten Zeichnen
+        	 * auch noch updaten, wenn die anders sind als die neuen
+        	 */
         	for (int i = 0; i < bullets.length; i++) {
     			repaint(new Rectangle(bullets[i].getBounds().x-bullets[i].getBounds().width/2,
     					bullets[i].getBounds().y-bullets[i].getBounds().height/2,
