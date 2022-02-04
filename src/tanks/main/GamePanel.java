@@ -18,8 +18,6 @@ import tanks.gobj.Renderable;
 public class GamePanel extends JPanel {
 
 	public static double s = 1;
-	private static long m = 0;
-	// private static double delta = 0;
 	
 	private ArrayList<Renderable> renderables = new ArrayList<>();
 	private ArrayList<Rectangle> bounds = new ArrayList<>();
@@ -36,29 +34,52 @@ public class GamePanel extends JPanel {
 
 	private long lastDrawn = System.nanoTime();
 	
+	private ArrayList<Double> lastDeltas = new ArrayList<>();
+	
+	private int getFps() {
+		double deltaSum = 0;
+		for (double d : lastDeltas) {
+			deltaSum += d;
+		}
+		
+		return ((int) (lastDeltas.size() / deltaSum));
+	}
+	
+	private int calculateFps(double delta) {
+		lastDeltas.add(delta);
+		
+		if (lastDeltas.size() > 100) {
+			lastDeltas.remove(0);
+		}
+		
+		return getFps();
+	}
+	
 	@Override
     protected void paintComponent(Graphics g) {
 		long startTime = System.nanoTime();
-		move((startTime - lastDrawn) / 1_000_000_000.0);
+		double delta = (startTime - lastDrawn) / 1_000_000_000.0;
+		move(delta);
 		this.lastDrawn = startTime;
 		
 		ArrayList<Rectangle> newBounds = new ArrayList<>();
 		
         super.paintComponent(g);
-        
-        m = System.nanoTime();
-        
+                
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         g.setColor(Color.WHITE);
         
         g2.scale(s, s);
-       
+       		
         g.setFont(Var.getModifiedFont(Var.pixelFont, 24));
+		g.drawString("FPS: " + calculateFps(delta), 20, 25);
         g.drawString("Bullets: " + Var.bullets.size(), 20, 75);
         
-        Var.FPSCount.tick();
+        newBounds.add(new Rectangle(10, 10, 100, 200));
+        
+        //Var.FPSCount.tick();
         
         for (Renderable toRender : renderables) {
 			toRender.render(g);
@@ -85,20 +106,12 @@ public class GamePanel extends JPanel {
 		
 		this.bounds = newBounds;
         
-        
-        /*
-        delta = System.nanoTime() - m;
-        delta = delta/1_000_000.0;
-        if((int) (Misc.FPStoMS(Var.fps) - delta) > 0) {
-        	long start = System.nanoTime();
-        	double sleepingTime = (Misc.FPStoMS(Var.fps) - delta) + Var.SleptDiff;
-        	if((int)sleepingTime > 0) {
-        		Misc.sleeping((int)sleepingTime);
-            	double slept = ((System.nanoTime() - start)/ 1_000_000.0);
-            	Var.SleptDiff = sleepingTime - slept;
-        	}
-        }
-        */
+
+		double renderTime = ((double) (System.nanoTime() - startTime)) / 1_000_000_000.0;
+		if (renderTime < Var.sPerFrame) {
+        	double sleepingTimeMs = (1000.0 * (Var.sPerFrame - renderTime));
+        	if((int) sleepingTimeMs > 0) Misc.sleeping((int) sleepingTimeMs);
+		}
 	}
 	
 	private void move(double delta) {
