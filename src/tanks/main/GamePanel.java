@@ -74,8 +74,10 @@ public class GamePanel extends JPanel {
         g2.scale(s, s);
        		
         g.setFont(Var.getModifiedFont(Var.pixelFont, 24));
-		g.drawString("FPS: " + calculateFps(delta), 20, 25);
-        g.drawString("Bullets: " + Var.bullets.size(), 20, 75);
+		g.drawString("FPS:      " + calculateFps(delta), 20, 25);
+        g.drawString("Bullets:  " + Var.bullets.size(), 20, 50);
+        g.drawString("Score P1: " + Var.p1.getScore(), 20, 75);
+        g.drawString("Score P2: " + Var.p2.getScore(), 20, 100);
         
         newBounds.add(new Rectangle(10, 10, 100, 200));
         
@@ -93,6 +95,7 @@ public class GamePanel extends JPanel {
 		}
         
         if (true || Var.didScreenChange) {
+        	// tu immer dies hier, weil rotierte Panzer
 			repaint();
 			Var.didScreenChange = false;
 		} else {

@@ -91,12 +91,8 @@ public class Bullet implements Renderable {
 			for (Tank tank : tanks) {
 				if (tank.getBounds().intersects(getBounds())) {
 					// collides
-					if (tank == this.origin) {
-						System.out.println(tank.getName() + " commited suicide.");
-					} else {
-						System.out.println(this.origin.getName() + " shot " + tank.getName());
-					}
-					// TODO: kill tank
+					System.out.println(this.origin.getName() + " shot " + tank.getName());
+					if (tank.hit() && this.origin != tank) this.origin.increaseScore();
 					return false;
 				}
 			}

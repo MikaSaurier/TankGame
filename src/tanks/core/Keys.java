@@ -51,6 +51,11 @@ public class Keys implements KeyListener{
 		}if(k == KeyEvent.VK_B) {
 			Var.showBounds = true;
 		}
+		
+		if (k == KeyEvent.VK_SPACE) {
+			Var.p1.revive();
+			Var.p2.revive();
+		}
 	}
 
 	@Override

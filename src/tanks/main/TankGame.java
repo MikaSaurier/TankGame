@@ -58,8 +58,8 @@ public class TankGame {
 		Var.FrameHeight = 900;
 		
 		Var.sPerFrame = 1.0 / 120.0;
-		Var.p1 = new Tank("Ernie", 250, 50, 50, 50, Color.BLUE);
-		Var.p2 = new Tank("Bernd", 500, 50, 50, 50, Color.RED);
+		Var.p1 = new Tank("Ernie", 250, 50, 50, 50, 0, Color.BLUE);
+		Var.p2 = new Tank("Bernd", 500, 50, 50, 50, Math.PI, Color.RED);
 		
 		try {
 			Var.pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("res/coders_crux.ttf")).deriveFont(125f);
