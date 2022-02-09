@@ -102,20 +102,24 @@ public class GamePanel extends JPanel {
 			Var.p1.move(+MOVE_MULT * delta);
 		} if (Var.P1MoveDOWN) {
 			Var.p1.move(-MOVE_MULT * delta);
-		} if (Var.P1MoveLEFT) {
-			Var.p1.rotate(-ROTATE_MULT * delta);
+		} 
+		int rotMult1 = Var.P1MoveDOWN ? -1 : 1;
+		if (Var.P1MoveLEFT) {
+			Var.p1.rotate(rotMult1 * -ROTATE_MULT * delta);
 		} if (Var.P1MoveRIGHT) {
-			Var.p1.rotate(+ROTATE_MULT * delta);
+			Var.p1.rotate(rotMult1 * +ROTATE_MULT * delta);
 		}
 		
 		if (Var.P2MoveUP) {
 			Var.p2.move(+MOVE_MULT * delta);
 		} if (Var.P2MoveDOWN) {
 			Var.p2.move(-MOVE_MULT * delta);
-		} if (Var.P2MoveLEFT) {
-			Var.p2.rotate(-ROTATE_MULT * delta);
+		}
+		int rotMult2 = Var.P2MoveDOWN ? -1 : 1;
+		if (Var.P2MoveLEFT) {
+			Var.p2.rotate(rotMult2 * -ROTATE_MULT * delta);
 		} if (Var.P2MoveRIGHT) {
-			Var.p2.rotate(+ROTATE_MULT * delta);
+			Var.p2.rotate(rotMult2 * +ROTATE_MULT * delta);
 		}
 		
 		if (Var.P1Shoot) {

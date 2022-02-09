@@ -36,7 +36,7 @@ public class Tank implements Renderable {
 	public void shoot() {
 		if (isDead()) return;
 		// every 100ms
-		if (lastShot + 100_000_000 < System.nanoTime()) {
+		if (lastShot + 200_000_000 < System.nanoTime()) {
 			Var.bullets.add(new Bullet(this, 5, 2, 3));
 			lastShot = System.nanoTime();
 		}

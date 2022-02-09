@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
+import tanks.core.Misc;
 import tanks.core.Var;
 
 public class Bullet implements Renderable, Circle {
@@ -21,6 +22,7 @@ public class Bullet implements Renderable, Circle {
 	private boolean dead = false;
 	
 	public Bullet(Tank origin, int radius, double speed, int maxColls) {
+		Misc.AACFastPlay("res/Shot.m4a", 13);
 		double angle = origin.getAngle();
 		this.dx = 250 * speed * Math.cos(angle);
 		this.dy = 250 * speed * Math.sin(angle);
@@ -79,6 +81,7 @@ public class Bullet implements Renderable, Circle {
 				if (collidesY) {
 					this.dy = -dy;
 				}
+				Misc.AACFastPlay("res/Shot.m4a", 5);
 				this.collCount++;
 			} else {
 				// collided too often

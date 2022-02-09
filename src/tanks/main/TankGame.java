@@ -44,7 +44,7 @@ public class TankGame {
 		Var.f.addMouseListener(mml);
 		Var.f.addMouseMotionListener(mml);
 		
-		Misc.AACFastPlay("res/TanksMusic.m4a", 10);
+		Misc.AACFastPlay("res/TanksMusic.m4a", 20);
 		
 		System.out.println("Finished after " + ((System.nanoTime() - time) / 1_000_000_000.0) + " s");	
 	}
