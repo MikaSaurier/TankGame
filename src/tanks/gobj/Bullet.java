@@ -4,12 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.geom.Point2D;
 
 import tanks.core.Var;
 
-public class Bullet implements Renderable {
+public class Bullet implements Renderable, Circle {
 
-	private int radius;
+	private int radius, radiusSquared;
 	private double x, y, speed, dx, dy;
 	private Color color, tmpColor;
 	private int collCount = 0;
@@ -17,17 +18,17 @@ public class Bullet implements Renderable {
 	private long ttl = 20_000_000_000l; // time to live in nano seconds (20 s)
 	private long spawnTime;
 	private Tank origin;
-	private boolean leftPlayer = false;
 	private boolean dead = false;
 	
 	public Bullet(Tank origin, int radius, double speed, int maxColls) {
 		double angle = origin.getAngle();
-		this.dx = 200 * speed * Math.cos(angle);
-		this.dy = 200 * speed * Math.sin(angle);
-		//       (      center of origin                ) + ( half of with to get outside of player   )
+		this.dx = 250 * speed * Math.cos(angle);
+		this.dy = 250 * speed * Math.sin(angle);
+		//       (      center of origin                ) + ( half of width to get outside of player   )
 		this.x = (origin.getX() + origin.getWidth() / 2 ) + (origin.getWidth() * 0.5 * Math.cos(angle))  - radius;
 		this.y = (origin.getY() + origin.getHeight() / 2) + (origin.getHeight() * 0.5 * Math.sin(angle)) - radius;
 		this.radius = radius;
+		this.radiusSquared = radius * radius;
 		this.origin = origin;
 		this.speed = speed;
 		this.color = origin.getColor();
@@ -43,18 +44,16 @@ public class Bullet implements Renderable {
 		return y;
 	}
 	
+	public int getRadius() {
+		return radius;
+	}
+	
+	public int getRadiusSquared() {
+		return radiusSquared;
+	}
+	
 	public void kill() {
 		dead = true;
-	}
-	
-	public Point getCenter() {
-		return new Point((int) x + radius, (int) y + radius);
-	}
-	
-	public boolean intersects(Bullet other) {
-		// first has probably bit better performance, but isn't correct
-		//return other.getBounds().intersects(getBounds()); 
-		return radius * radius > getCenter().distanceSq(other.getCenter());
 	}
 
 	public Rectangle getBounds() {
@@ -86,18 +85,15 @@ public class Bullet implements Renderable {
 				return false;
 			}
 		}
-		// check collision with players
-		if (this.leftPlayer) {
-			for (Tank tank : tanks) {
-				if (tank.getBounds().intersects(getBounds())) {
-					// collides
-					System.out.println(this.origin.getName() + " shot " + tank.getName());
-					if (tank.hit() && this.origin != tank) this.origin.increaseScore();
-					return false;
-				}
+		for (Tank tank : tanks) {
+			// can only hit origin if it collided
+			if (tank == this.origin && collCount == 0) continue;
+			if (!tank.isDead() && tank.getBounds().intersects(getBounds())) {
+				// collides
+				System.out.println(this.origin.getName() + " shot " + tank.getName());
+				if (tank.hit() && this.origin != tank) this.origin.increaseScore();
+				return false;
 			}
-		} else if (!this.origin.getBounds().intersects(getBounds())) {
-			this.leftPlayer = true;
 		}
 		// check collision with other bullets
 		for (Bullet bullet : Var.bullets) {

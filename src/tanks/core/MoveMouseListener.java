@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 
 public class MoveMouseListener implements MouseListener, MouseMotionListener{
 
-	JComponent target;
+      JComponent target;
 	  Point start_drag;
 	  Point start_loc;
 

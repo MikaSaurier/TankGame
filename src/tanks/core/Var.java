@@ -23,8 +23,8 @@ public class Var {
 	public static Tank p1, p2;
 	public static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	
-	public static boolean P1MoveUP, P1MoveDOWN, P1MoveLEFT, P1MoveRIGHT;
-	public static boolean P2MoveUP, P2MoveDOWN, P2MoveLEFT, P2MoveRIGHT;
+	public static boolean P1MoveUP = false, P1MoveDOWN = false, P1MoveLEFT = false, P1MoveRIGHT = false, P1Shoot = false;
+	public static boolean P2MoveUP = false, P2MoveDOWN = false, P2MoveLEFT = false, P2MoveRIGHT = false, P2Shoot = false;
 	public static double sPerFrame;
 	public static double SleptDiff = 0;
 	

@@ -18,9 +18,8 @@ import tanks.gobj.Tank;
 
 public class TankGame {
 
-	public static void main(String[] args) {
-		
-		long time = System.currentTimeMillis();
+	public static void main(String[] args) {	
+		long time = System.nanoTime();
 		
 		init();
 		
@@ -47,8 +46,7 @@ public class TankGame {
 		
 		Misc.AACFastPlay("res/TanksMusic.m4a", 10);
 		
-		System.out.println("Finished after " + (System.currentTimeMillis()-time) + " ms");
-		
+		System.out.println("Finished after " + ((System.nanoTime() - time) / 1_000_000_000.0) + " s");	
 	}
 
 	private static void init() {
@@ -77,5 +75,4 @@ public class TankGame {
 		Var.gamepanel.getRenderables().add(Var.p1);
 		//Var.gamepanel.getRenderables().add(Var.FPSCount);
 	}
-
 }

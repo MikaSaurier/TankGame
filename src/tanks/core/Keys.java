@@ -25,9 +25,9 @@ public class Keys implements KeyListener{
 		}if(k == KeyEvent.VK_L) {
 			Var.P2MoveRIGHT = true;
 		}if(k == KeyEvent.VK_C) {
-			Var.p1.shoot();
+			Var.P1Shoot = true;
 		}if(k == KeyEvent.VK_N) {
-			Var.p2.shoot();
+			Var.P2Shoot = true;
 		}if(k == KeyEvent.VK_ESCAPE) {
 			System.exit(0);
 		}if(k == KeyEvent.VK_F) {
@@ -69,7 +69,8 @@ public class Keys implements KeyListener{
 			Var.P1MoveDOWN = false;
 		}if(k == KeyEvent.VK_D) {
 			Var.P1MoveRIGHT = false;
-		}if(k == KeyEvent.VK_I) {
+		}
+		if(k == KeyEvent.VK_I) {
 			Var.P2MoveUP = false;
 		}if(k == KeyEvent.VK_J) {
 			Var.P2MoveLEFT = false;
@@ -77,8 +78,14 @@ public class Keys implements KeyListener{
 			Var.P2MoveDOWN = false;
 		}if(k == KeyEvent.VK_L) {
 			Var.P2MoveRIGHT = false;
-		}if(k == KeyEvent.VK_B) {
+		}
+		if(k == KeyEvent.VK_B) {
 			Var.showBounds = false;
+		}
+		if(k == KeyEvent.VK_C) {
+			Var.P1Shoot = false;
+		}if(k == KeyEvent.VK_N) {
+			Var.P2Shoot = false;
 		}
 	}
 

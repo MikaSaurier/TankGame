@@ -34,7 +34,7 @@ public class Tank implements Renderable {
 	}
 	
 	public void shoot() {
-		if (lives <= 0) return;
+		if (isDead()) return;
 		// every 100ms
 		if (lastShot + 100_000_000 < System.nanoTime()) {
 			Var.bullets.add(new Bullet(this, 5, 2, 3));
@@ -43,7 +43,7 @@ public class Tank implements Renderable {
 	}
 	
 	public void revive() {
-		if (lives <= 0) {
+		if (isDead()) {
 			lives = DEFAULT_LIFES;
 		}
 	}
@@ -58,8 +58,12 @@ public class Tank implements Renderable {
 	
 	public boolean hit() {
 		// returns true if the hit killed.
-		if (lives <= 0) return false;
+		if (isDead()) return false;
 		return --lives <= 0;
+	}
+	
+	public boolean isDead() {
+		return lives <= 0;
 	}
 	
 	public int getHeight() {
@@ -95,16 +99,59 @@ public class Tank implements Renderable {
     }
     
     public void move(double val) {
-    	this.x = Math.max(0, Math.min(this.x + Math.cos(angle) * val, Var.FrameWidth - this.width));
-    	this.y = Math.max(0, Math.min(this.y + Math.sin(angle) * val, Var.FrameHeight - this.height));
+    	move(Math.cos(angle) * val, Math.sin(angle) * val);
     }
     
-	public int getX() {
-		return (int) x;
+    private void move(double dx, double dy) {
+    	double oldX = this.x;
+    	double oldY = this.y;
+    	this.x = Math.max(0, Math.min(this.x + dx, Var.FrameWidth - this.width));
+    	this.y = Math.max(0, Math.min(this.y + dy, Var.FrameHeight - this.height));
+    	
+    	Tank other = Var.p1 == this ? Var.p2 : Var.p1;
+    	
+    	if (isDead() || other.isDead())  {
+    		return; // dead tanks have no collision
+    	}
+    	
+    	double newX = this.x;
+    	double newY = this.y;
+    	
+    	if (other.getBounds().intersects(getBounds())) {
+    		if (dx < 0) { // moved ←
+    			if (newX < other.getX() + other.width && oldX >= other.getX() + other.width) {
+    				newX = other.getX() + other.width;
+    			}
+    		} else if (dx > 0) { // moved →
+    			if (newX + this.width > other.getX() && oldX + this.width <= other.getX()) {
+    				newX = other.getX() - this.width;
+    			}
+    		}
+    		if (dy < 0) { // moved ↑
+    			if (newY < other.getY() + other.height && oldY >= other.getY() + other.height) {
+    				newY = other.getY() + other.height;
+    			}
+    		} else if (dy > 0) { // moved ↓
+    			if (newY + this.height > other.getY() && oldY + this.height <= other.getY()) {
+    				newY = other.getY() - this.height;
+    			}
+    		}
+    		if (newX == this.x && newY == this.y) { // just to avoid bugs
+    			newX = oldX;
+    			newY = oldY;
+    		}
+    		this.x = newX;
+        	this.y = newY;
+    	}
+    	
+    }
+    
+	public double getX() {
+		return x;
 	}
 
-	public int getY() {
-		return (int) y;
+	public double getY() {
+		return y;
 	}
 
 	public Color getColor() {
@@ -118,7 +165,7 @@ public class Tank implements Renderable {
 	public void render(Graphics g) {
 		tmpColor = g.getColor();
 		
-		if (lives <= 0) {
+		if (isDead()) {
 			g.setColor(color.darker());
 		} else {
 			g.setColor(color);

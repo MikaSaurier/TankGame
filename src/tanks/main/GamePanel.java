@@ -73,8 +73,8 @@ public class GamePanel extends JPanel {
         g.setFont(Var.getModifiedFont(Var.pixelFont, 24));
 		g.drawString("FPS:      " + calculateFps(delta), 20, 25);
         g.drawString("Bullets:  " + Var.bullets.size(), 20, 50);
-        g.drawString("Score P1: " + Var.p1.getScore(), 20, 75);
-        g.drawString("Score P2: " + Var.p2.getScore(), 20, 100);
+        g.drawString("Kills P1: " + Var.p1.getScore(), 20, 75);
+        g.drawString("Kills P2: " + Var.p2.getScore(), 20, 100);
                    
         for (Renderable toRender : renderables) {
 			toRender.render(g);
@@ -85,7 +85,7 @@ public class GamePanel extends JPanel {
 			bullet.render(g);
 		}
         
-        repaint();        
+        repaint();
 
 		double renderTime = ((double) (System.nanoTime() - startTime)) / 1_000_000_000.0;
 		if (renderTime < Var.sPerFrame) {
@@ -94,25 +94,34 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
+	
+	private final int MOVE_MULT = 222;
+	private final double ROTATE_MULT = 0.5 * Math.PI;
 	private void move(double delta) {
-		if(Var.P1MoveUP) {
-			Var.p1.move(+200 * delta);
-		} if(Var.P1MoveDOWN) {
-			Var.p1.move(-200 * delta);
-		} if(Var.P1MoveLEFT) {
-			Var.p1.rotate(-delta);
-		} if(Var.P1MoveRIGHT) {
-			Var.p1.rotate(+delta);
+		if (Var.P1MoveUP) {
+			Var.p1.move(+MOVE_MULT * delta);
+		} if (Var.P1MoveDOWN) {
+			Var.p1.move(-MOVE_MULT * delta);
+		} if (Var.P1MoveLEFT) {
+			Var.p1.rotate(-ROTATE_MULT * delta);
+		} if (Var.P1MoveRIGHT) {
+			Var.p1.rotate(+ROTATE_MULT * delta);
 		}
 		
-		if(Var.P2MoveUP) {
-			Var.p2.move(+200 * delta);
-		} if(Var.P2MoveDOWN) {
-			Var.p2.move(-200 * delta);
-		} if(Var.P2MoveLEFT) {
-			Var.p2.rotate(-delta);
-		} if(Var.P2MoveRIGHT) {
-			Var.p2.rotate(+delta);
+		if (Var.P2MoveUP) {
+			Var.p2.move(+MOVE_MULT * delta);
+		} if (Var.P2MoveDOWN) {
+			Var.p2.move(-MOVE_MULT * delta);
+		} if (Var.P2MoveLEFT) {
+			Var.p2.rotate(-ROTATE_MULT * delta);
+		} if (Var.P2MoveRIGHT) {
+			Var.p2.rotate(+ROTATE_MULT * delta);
+		}
+		
+		if (Var.P1Shoot) {
+			Var.p1.shoot();
+		} if (Var.P2Shoot) {
+			Var.p2.shoot();
 		}
 		
 		Bullet[] bullets = Var.bullets.toArray(new Bullet[0]);
@@ -122,5 +131,4 @@ public class GamePanel extends JPanel {
 			}
 		}
 	}
-	
 }
