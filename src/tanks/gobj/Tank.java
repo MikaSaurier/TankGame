@@ -8,10 +8,10 @@ import java.awt.geom.AffineTransform;
 
 import tanks.core.Var;
 
-public class Tank implements Renderable {
+public class Tank implements Renderable, Circle {
 
 	private String name;
-	private int width, height;
+	private final int radius, diameter;
 	private double x, y, angle;
 	private Color color, tmpColor;
 	private long lastShot = 0;
@@ -19,18 +19,18 @@ public class Tank implements Renderable {
 	private int lives = DEFAULT_LIFES;
 	private long score = 0;
 	
-	public Tank(String name, int x, int y, int width, int height, double angle, Color color) {
+	public Tank(String name, int x, int y, int radius, double angle, Color color) {
 		this.name = name;
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
+		this.radius = radius;
+		this.diameter = radius * 2;
 		this.color = color;
 		this.angle = angle;
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle((int) x, (int)y, width, height);
+		return new Rectangle((int) x, (int)y, diameter, diameter);
 	}
 	
 	public void shoot() {
@@ -66,22 +66,6 @@ public class Tank implements Renderable {
 		return lives <= 0;
 	}
 	
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-	
 	public String getName() {
 		return name;
 	}
@@ -99,53 +83,38 @@ public class Tank implements Renderable {
     }
     
     public void move(double val) {
-    	move(Math.cos(angle) * val, Math.sin(angle) * val);
+    	moveAngle(val, angle, true);
     }
     
-    private void move(double dx, double dy) {
-    	double oldX = this.x;
-    	double oldY = this.y;
-    	this.x = Math.max(0, Math.min(this.x + dx, Var.FrameWidth - this.width));
-    	this.y = Math.max(0, Math.min(this.y + dy, Var.FrameHeight - this.height));
+    private void moveAngle(double val, double angle, boolean collisionCheck) {
+    	move(Math.cos(angle) * val, Math.sin(angle) * val, collisionCheck);
+    }
+    
+    private void move(double dx, double dy, boolean collisionCheck) {
+    	setX(this.x + dx);
+    	setY(this.y + dy);
+    	
+    	if (!collisionCheck) return;
     	
     	Tank other = Var.p1 == this ? Var.p2 : Var.p1;
     	
-    	if (isDead() || other.isDead())  {
-    		return; // dead tanks have no collision
+    	if (!(isDead() || other.isDead()) && this.intersects(other)) {
+    		// https://flatredball.com/documentation/tutorials/math/circle-collision/
+    		double angle = Math.atan2(other.getCenterY() - this.getCenterY(), other.getCenterX() - this.getCenterX());
+    		double distToMove = this.distanceTo(other) - (this.getRadius() + other.getRadius());
+    		this.moveAngle(+0.7 * distToMove, angle, false);
+    		other.moveAngle(-0.3 * distToMove, angle, false);
     	}
-    	
-    	double newX = this.x;
-    	double newY = this.y;
-    	
-    	if (other.getBounds().intersects(getBounds())) {
-    		if (dx < 0) { // moved ←
-    			if (newX < other.getX() + other.width && oldX >= other.getX() + other.width) {
-    				newX = other.getX() + other.width;
-    			}
-    		} else if (dx > 0) { // moved →
-    			if (newX + this.width > other.getX() && oldX + this.width <= other.getX()) {
-    				newX = other.getX() - this.width;
-    			}
-    		}
-    		if (dy < 0) { // moved ↑
-    			if (newY < other.getY() + other.height && oldY >= other.getY() + other.height) {
-    				newY = other.getY() + other.height;
-    			}
-    		} else if (dy > 0) { // moved ↓
-    			if (newY + this.height > other.getY() && oldY + this.height <= other.getY()) {
-    				newY = other.getY() - this.height;
-    			}
-    		}
-    		if (newX == this.x && newY == this.y) { // just to avoid bugs
-    			newX = oldX;
-    			newY = oldY;
-    		}
-    		this.x = newX;
-        	this.y = newY;
-    	}
-    	
     }
     
+    private void setY(double y) {
+    	this.y = Math.max(0, Math.min(y, Var.FrameHeight - this.diameter));
+    }
+    
+    private void setX(double x) {
+    	this.x = Math.max(0, Math.min(x, Var.FrameWidth - this.diameter));
+    }
+        
 	public double getX() {
 		return x;
 	}
@@ -175,23 +144,26 @@ public class Tank implements Renderable {
 		
 		g.drawString(
 			overPlayer,
-			(int) x + width/2 - g.getFontMetrics().stringWidth(overPlayer) / 2,
-			(int) y - width/10
+			(int) getCenterX() - g.getFontMetrics().stringWidth(overPlayer) / 2,
+			(int) y - diameter / 10
 		);
 		
 		Graphics2D g2d = (Graphics2D) g;
 		AffineTransform old = g2d.getTransform();
-		g2d.rotate(angle, (int) x + width/2, (int) y + height/2);
-		g.fillRect((int) x, (int) y, width, height);
+		g2d.rotate(angle, (int) getCenterX(), (int) getCenterY());
+		g.fillRect((int) x, (int) y, diameter, diameter);
+		
+		g.drawLine(
+			(int) getCenterX(), 
+			(int) getCenterY(),
+			(int) getCenterX() + diameter, 
+			(int) getCenterY()
+		);
+		
 		g2d.setTransform(old);
 		
 		
-		g.drawLine(
-			(int) x + width/2, 
-			(int) y + height/2,
-			(int) (x + width / 2 + Math.max(width, height) * (Math.cos(angle))), 
-			(int) (y + height / 2 + Math.max(width, height) * (Math.sin(angle)))
-		);
+		
 		/*g.fillArc(
 				(int) (Var.g1.getCoordX(pnow.x)+10*(Math.cos((angel-165)*Math.PI/180))), 
 				(int) (Var.g1.getCoordY(pnow.y)+10*(Math.cos((angel-75)*Math.PI/180))), 
@@ -204,6 +176,11 @@ public class Tank implements Renderable {
 //			g.drawPolyline(xPoints, yPoints, xPoints.length);
 //		}
 		g.setColor(tmpColor);
+	}
+
+	@Override
+	public int getRadius() {
+		return radius;
 	}
 
 }

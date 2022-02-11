@@ -24,18 +24,7 @@ public class Misc {
 	}
 	
 	public static void AACFastPlay(String in) {
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				AACPlayer player = new AACPlayer(in);
-				try {
-					player.play();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		t.start();
+		AACFastPlay(in, 50);
 	}
 	
 	public static void sleeping(int ms) {

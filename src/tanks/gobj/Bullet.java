@@ -11,7 +11,7 @@ import tanks.core.Var;
 
 public class Bullet implements Renderable, Circle {
 
-	private int radius, radiusSquared;
+	private int radius;
 	private double x, y, speed, dx, dy;
 	private Color color, tmpColor;
 	private int collCount = 0;
@@ -26,11 +26,10 @@ public class Bullet implements Renderable, Circle {
 		double angle = origin.getAngle();
 		this.dx = 250 * speed * Math.cos(angle);
 		this.dy = 250 * speed * Math.sin(angle);
-		//       (      center of origin                ) + ( half of width to get outside of player   )
-		this.x = (origin.getX() + origin.getWidth() / 2 ) + (origin.getWidth() * 0.5 * Math.cos(angle))  - radius;
-		this.y = (origin.getY() + origin.getHeight() / 2) + (origin.getHeight() * 0.5 * Math.sin(angle)) - radius;
+		
+		this.x = origin.getCenterX() + (origin.getRadius() * Math.cos(angle))  - radius;
+		this.y = origin.getCenterY() + (origin.getRadius() * Math.sin(angle)) - radius;
 		this.radius = radius;
-		this.radiusSquared = radius * radius;
 		this.origin = origin;
 		this.speed = speed;
 		this.color = origin.getColor();
@@ -48,10 +47,6 @@ public class Bullet implements Renderable, Circle {
 	
 	public int getRadius() {
 		return radius;
-	}
-	
-	public int getRadiusSquared() {
-		return radiusSquared;
 	}
 	
 	public void kill() {
@@ -91,7 +86,7 @@ public class Bullet implements Renderable, Circle {
 		for (Tank tank : tanks) {
 			// can only hit origin if it collided
 			if (tank == this.origin && collCount == 0) continue;
-			if (!tank.isDead() && tank.getBounds().intersects(getBounds())) {
+			if (!tank.isDead() && tank.intersects(this)) {
 				// collides
 				System.out.println(this.origin.getName() + " shot " + tank.getName());
 				if (tank.hit() && this.origin != tank) this.origin.increaseScore();

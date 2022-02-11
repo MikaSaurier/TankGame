@@ -8,10 +8,6 @@ public interface Circle {
 	
 	int getRadius();
 	
-	default int getRadiusSquared() {
-		return getRadius() * getRadius();
-	}
-	
 	default double getCenterX() {
 		return getX() + getRadius();
 	}
@@ -19,9 +15,20 @@ public interface Circle {
 	default double getCenterY() {
 		return getY() + getRadius();
 	}
+	
+	default double distanceSquared(Circle circle) {
+		double diffX = getCenterX() - circle.getCenterX();
+		double diffY = getCenterY() - circle.getCenterY();
+		
+		return diffX * diffX + diffY * diffY;
+	}
+	
+	default double distanceTo(Circle circle) {
+		return Math.sqrt(distanceSquared(circle));
+	}
 		
 	default boolean intersects(Circle circle) {
-		return getRadiusSquared() > Math.pow(getCenterX() - circle.getCenterX(), 2) + Math.pow(getCenterY() - circle.getCenterY(), 2);
+		return Math.pow(getRadius() + circle.getRadius(), 2) > distanceSquared(circle);
 	}
 
 }
