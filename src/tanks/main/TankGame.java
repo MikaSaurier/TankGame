@@ -56,7 +56,7 @@ public class TankGame {
 		Var.FrameWidth = 1600;
 		Var.FrameHeight = 900;
 		
-		Var.sPerFrame = 1.0 / 120.0;
+		Var.sPerFrame = 0 * 1.0 / 120.0;
 		Var.g1 = new Ground(0, 0, 64, Var.FrameWidth/64, Var.FrameHeight/64, Color.WHITE);
 		Var.g1.setTexture("res/planks.png", "res/planks90.png");
 		Var.p1 = new Tank("Ernie", 250, 50, 25, 0, Color.BLUE);

@@ -96,7 +96,7 @@ public class GamePanel extends JPanel {
 	
 	
 	private final int MOVE_MULT = 222;
-	private final double ROTATE_MULT = 0.5 * Math.PI;
+	private final double ROTATE_MULT = 0.8 * Math.PI;
 	private void move(double delta) {
 		if (Var.P1MoveUP) {
 			Var.p1.move(+MOVE_MULT * delta);

@@ -26,7 +26,7 @@ public class Keys implements KeyListener{
 			Var.P2MoveRIGHT = true;
 		}if(k == KeyEvent.VK_C) {
 			Var.P1Shoot = true;
-		}if(k == KeyEvent.VK_N) {
+		}if(k == 46) {
 			Var.P2Shoot = true;
 		}if(k == KeyEvent.VK_ESCAPE) {
 			System.exit(0);
@@ -84,7 +84,7 @@ public class Keys implements KeyListener{
 		}
 		if(k == KeyEvent.VK_C) {
 			Var.P1Shoot = false;
-		}if(k == KeyEvent.VK_N) {
+		}if(k == 46) {
 			Var.P2Shoot = false;
 		}
 	}

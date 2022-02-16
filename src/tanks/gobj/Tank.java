@@ -37,7 +37,7 @@ public class Tank implements Renderable, Circle {
 		if (isDead()) return;
 		// every 100ms
 		if (lastShot + 200_000_000 < System.nanoTime()) {
-			Var.bullets.add(new Bullet(this, 5, 2, 3));
+			Var.bullets.add(new Bullet(this, 5, 2));
 			lastShot = System.nanoTime();
 		}
 	}
@@ -162,19 +162,6 @@ public class Tank implements Renderable, Circle {
 		
 		g2d.setTransform(old);
 		
-		
-		
-		/*g.fillArc(
-				(int) (Var.g1.getCoordX(pnow.x)+10*(Math.cos((angel-165)*Math.PI/180))), 
-				(int) (Var.g1.getCoordY(pnow.y)+10*(Math.cos((angel-75)*Math.PI/180))), 
-				40, 
-				40, 
-				angel, 
-				30
-				);*/
-//		if(xPoints.length > 0 && yPoints.length > 0) {
-//			g.drawPolyline(xPoints, yPoints, xPoints.length);
-//		}
 		g.setColor(tmpColor);
 	}
 

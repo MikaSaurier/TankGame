@@ -21,7 +21,7 @@ public class Bullet implements Renderable, Circle {
 	private Tank origin;
 	private boolean dead = false;
 	
-	public Bullet(Tank origin, int radius, double speed, int maxColls) {
+	public Bullet(Tank origin, int radius, double speed) {
 		Misc.AACFastPlay("res/Shot.m4a", 13);
 		double angle = origin.getAngle();
 		this.dx = 250 * speed * Math.cos(angle);
@@ -33,7 +33,6 @@ public class Bullet implements Renderable, Circle {
 		this.origin = origin;
 		this.speed = speed;
 		this.color = origin.getColor();
-		this.maxColls = maxColls;
 		this.spawnTime = System.nanoTime();
 	}
 	
@@ -66,15 +65,17 @@ public class Bullet implements Renderable, Circle {
 		this.x += dx * delta;
 		this.y += dy * delta;
 		// check collision with window bounds
-		boolean collidesX = x < 0 || x + radius * 2 > Var.FrameWidth;
-		boolean collidesY = y < 0 || y + radius * 2 > Var.FrameHeight;
+		boolean collidesX = (this.x < 0) || (this.x + (radius * 2) > Var.FrameWidth);
+		boolean collidesY = (this.y < 0) || (this.y + (radius * 2) > Var.FrameHeight);
 		if (collidesX || collidesY) {
 			if (this.collCount < this.maxColls) {
 				if (collidesX) {
 					this.dx = -dx;
+					this.x = Math.max(0, Math.min(Var.FrameWidth, this.x));
 				}
 				if (collidesY) {
 					this.dy = -dy;
+					this.y = Math.max(0, Math.min(Var.FrameHeight, this.y));
 				}
 				Misc.AACFastPlay("res/Shot.m4a", 5);
 				this.collCount++;
