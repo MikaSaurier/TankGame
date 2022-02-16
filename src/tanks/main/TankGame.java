@@ -14,6 +14,7 @@ import tanks.core.Keys;
 import tanks.core.Misc;
 import tanks.core.MoveMouseListener;
 import tanks.core.Var;
+import tanks.gobj.Ground;
 import tanks.gobj.Tank;
 
 public class TankGame {
@@ -56,6 +57,8 @@ public class TankGame {
 		Var.FrameHeight = 900;
 		
 		Var.sPerFrame = 1.0 / 120.0;
+		Var.g1 = new Ground(0, 0, 64, Var.FrameWidth/64, Var.FrameHeight/64, Color.WHITE);
+		Var.g1.setTexture("res/planks.png", "res/planks90.png");
 		Var.p1 = new Tank("Ernie", 250, 50, 25, 0, Color.BLUE);
 		Var.p2 = new Tank("Bernd", 500, 50, 25, Math.PI, Color.RED);
 		
@@ -71,6 +74,7 @@ public class TankGame {
 		Var.gamepanel.setVisible(true);
 		Var.gamepanel.setBounds(0, 0, Var.FrameWidth, Var.FrameHeight);
 		
+		Var.gamepanel.getRenderables().add(Var.g1);
 		Var.gamepanel.getRenderables().add(Var.p2);
 		Var.gamepanel.getRenderables().add(Var.p1);
 		//Var.gamepanel.getRenderables().add(Var.FPSCount);

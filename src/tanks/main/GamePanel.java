@@ -3,7 +3,6 @@ package tanks.main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 
@@ -71,10 +70,6 @@ public class GamePanel extends JPanel {
         g2.scale(s, s);
        		
         g.setFont(Var.getModifiedFont(Var.pixelFont, 24));
-		g.drawString("FPS:      " + calculateFps(delta), 20, 25);
-        g.drawString("Bullets:  " + Var.bullets.size(), 20, 50);
-        g.drawString("Kills P1: " + Var.p1.getScore(), 20, 75);
-        g.drawString("Kills P2: " + Var.p2.getScore(), 20, 100);
                    
         for (Renderable toRender : renderables) {
 			toRender.render(g);
@@ -85,6 +80,11 @@ public class GamePanel extends JPanel {
 			bullet.render(g);
 		}
         
+		g.drawString("FPS:      " + calculateFps(delta), 20, 25);
+        g.drawString("Bullets:  " + Var.bullets.size(), 20, 50);
+        g.drawString("Kills P1: " + Var.p1.getScore(), 20, 75);
+        g.drawString("Kills P2: " + Var.p2.getScore(), 20, 100);
+		
         repaint();
 
 		double renderTime = ((double) (System.nanoTime() - startTime)) / 1_000_000_000.0;
