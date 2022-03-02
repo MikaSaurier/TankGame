@@ -1,5 +1,7 @@
 package tanks.gobj;
 
+import java.awt.Point;
+
 public interface Circle {
 	
 	double getX();
@@ -19,6 +21,13 @@ public interface Circle {
 	default double distanceSquared(Circle circle) {
 		double diffX = getCenterX() - circle.getCenterX();
 		double diffY = getCenterY() - circle.getCenterY();
+		
+		return diffX * diffX + diffY * diffY;
+	}
+	
+	default double distanceSquared(Point point) {
+		double diffX = getCenterX() - point.getX();
+		double diffY = getCenterY() - point.getY();
 		
 		return diffX * diffX + diffY * diffY;
 	}

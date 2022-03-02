@@ -66,19 +66,15 @@ public class Bullet implements Renderable, Circle {
 		this.y += dy * delta;
 		// wall collisions
     	for (Wall wall : Var.gamepanel.getWalls()) {
-    		if (wall.intersects(this)) {
-    			//boolean intersectsX = 
-    			if (this.getCenterX() < wall.getCenterX()) {
-    				
-    			} else {
-    				
-    			}
-    			if (this.getCenterY() < wall.getCenterY()) {
-    				
-    			} else {
-    				
-    			}
-    			return false;
+    		Intersection interX = wall.intersectsX(this);
+    		if (interX != Intersection.None) {
+    			this.dx = -dx;
+    			this.x += dx * delta; // TODO: improve
+    		}
+    		Intersection interY = wall.intersectsY(this);
+    		if (interX != Intersection.None) {
+    			this.dy = -dy;
+    			this.y += dy * delta; // TODO: improve
     		}
     	}
 		// check collision with window bounds

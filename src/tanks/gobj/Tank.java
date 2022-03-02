@@ -99,8 +99,21 @@ public class Tank implements Renderable, Circle {
     	
     	// wall collisions
     	for (Wall wall : Var.gamepanel.getWalls()) {
-    		if (wall.intersects(this)) {
-    			this.lives = 0;
+    		Intersection interX = wall.intersectsX(this);
+    		if (interX != Intersection.None) {
+    			if (interX == Intersection.Left) {
+    				this.x = wall.getX() - this.diameter;
+    			} else {
+    				this.x = wall.getX() + wall.getWidth();
+    			}
+    		}
+    		Intersection interY = wall.intersectsY(this);
+    		if (interX != Intersection.None) {
+    			if (interX == Intersection.Top) {
+    				this.y = wall.getY() - this.diameter;
+    			} else {
+    				this.y = wall.getY() + wall.getHeight();
+    			}
     		}
     	}
     	
