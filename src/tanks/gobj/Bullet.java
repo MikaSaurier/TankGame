@@ -72,7 +72,7 @@ public class Bullet implements Renderable, Circle {
     			this.x += dx * delta; // TODO: improve
     		}
     		Intersection interY = wall.intersectsY(this);
-    		if (interX != Intersection.None) {
+    		if (interY != Intersection.None) {
     			this.dy = -dy;
     			this.y += dy * delta; // TODO: improve
     		}
