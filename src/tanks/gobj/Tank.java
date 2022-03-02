@@ -108,8 +108,8 @@ public class Tank implements Renderable, Circle {
     			}
     		}
     		Intersection interY = wall.intersectsY(this);
-    		if (interX != Intersection.None) {
-    			if (interX == Intersection.Top) {
+    		if (interY != Intersection.None) {
+    			if (interY == Intersection.Top) {
     				this.y = wall.getY() - this.diameter;
     			} else {
     				this.y = wall.getY() + wall.getHeight();
