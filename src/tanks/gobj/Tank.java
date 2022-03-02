@@ -94,7 +94,15 @@ public class Tank implements Renderable, Circle {
     	setX(this.x + dx);
     	setY(this.y + dy);
     	
+    	
     	if (!collisionCheck) return;
+    	
+    	// wall collisions
+    	for (Wall wall : Var.gamepanel.getWalls()) {
+    		if (wall.intersects(this)) {
+    			this.lives = 0;
+    		}
+    	}
     	
     	Tank other = Var.p1 == this ? Var.p2 : Var.p1;
     	

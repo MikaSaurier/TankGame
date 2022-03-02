@@ -12,6 +12,7 @@ import tanks.core.Misc;
 import tanks.core.Var;
 import tanks.gobj.Bullet;
 import tanks.gobj.Renderable;
+import tanks.gobj.Wall;
 
 
 public class GamePanel extends JPanel {
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel {
 	public static double s = 1;
 	
 	private ArrayList<Renderable> renderables = new ArrayList<>();
+	private ArrayList<Wall> walls = new ArrayList<>();
 	
 	public GamePanel() {
 		setLayout(null);
@@ -28,6 +30,9 @@ public class GamePanel extends JPanel {
 	
 	ArrayList<Renderable> getRenderables() {
 		return this.renderables;
+	}
+	public ArrayList<Wall> getWalls() {
+		return this.walls;
 	}
 
 	private long lastDrawn = System.nanoTime();
@@ -72,6 +77,10 @@ public class GamePanel extends JPanel {
         g.setFont(Var.getModifiedFont(Var.pixelFont, 24));
                    
         for (Renderable toRender : renderables) {
+			toRender.render(g);
+		}
+        
+        for (Renderable toRender : walls) {
 			toRender.render(g);
 		}
         

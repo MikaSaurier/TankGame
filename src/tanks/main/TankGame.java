@@ -16,6 +16,7 @@ import tanks.core.MoveMouseListener;
 import tanks.core.Var;
 import tanks.gobj.Ground;
 import tanks.gobj.Tank;
+import tanks.gobj.Wall;
 
 public class TankGame {
 
@@ -77,6 +78,7 @@ public class TankGame {
 		Var.gamepanel.getRenderables().add(Var.g1);
 		Var.gamepanel.getRenderables().add(Var.p2);
 		Var.gamepanel.getRenderables().add(Var.p1);
+		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth/2 - 50, Var.FrameHeight/2 - 210, 100, 420));
 		//Var.gamepanel.getRenderables().add(Var.FPSCount);
 	}
 }
