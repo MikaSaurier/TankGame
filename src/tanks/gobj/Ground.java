@@ -45,12 +45,12 @@ public class Ground implements Renderable {
 		
 		if(!textured) {
 			//GRID
-	        for (int i = (int) (x); i <= (int) x+(tileSize * width); i+=(int)tileSize) {
+	        /*for (int i = (int) (x); i <= (int) x+(tileSize * width); i+=(int)tileSize) {
 	    		g.drawLine(i, (int)(y), i, (int)(y+(tileSize * height)));
 			}
 			for (int i = (int) (y); i <= (int) y+(tileSize * height); i+=(int)tileSize) {
 	    		g.drawLine((int)(x), i, (int)(x+(tileSize * width)), i);
-			}
+			}*/
 		}else {
 			//TEXTURE
 	        for (int i = (int) (x); i <= (int) x+(tileSize * width); i+=(int)tileSize) {

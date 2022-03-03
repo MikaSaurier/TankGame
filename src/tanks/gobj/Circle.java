@@ -8,6 +8,10 @@ public interface Circle {
 	
 	double getY();
 	
+	double getLastX();
+	
+	double getLastY();
+	
 	int getRadius();
 	
 	default double getCenterX() {

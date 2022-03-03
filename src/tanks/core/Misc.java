@@ -9,6 +9,9 @@ public class Misc {
 	private static boolean toggleFullScreenWait;
 	
 	public static void AACFastPlay(String in, float vol) {
+		if (!Var.enableSound) {
+			return;
+		}
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
