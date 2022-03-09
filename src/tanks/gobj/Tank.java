@@ -152,8 +152,8 @@ public class Tank implements Renderable, Circle {
 	}
 
 	public void render(Graphics g) {
-		int x = (int) this.lastX;
-		int y = (int) this.lastY;
+		int x = (int) this.x;
+		int y = (int) this.y;
 		tmpColor = g.getColor();
 
 		if (isDead()) {

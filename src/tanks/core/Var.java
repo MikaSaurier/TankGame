@@ -16,7 +16,7 @@ public class Var {
 	
 	public static final int FrameWidth = 1600;
 	public static final int FrameHeight = 900;
-	public static final double sPerFrame = 0 * 1.0 / 120.0; // 0 ≙ ∞
+	public static final double sPerFrame = 0 * 1.0 / 120.0;
 	public static final Color OutlineColor = Color.WHITE;
 
 	
