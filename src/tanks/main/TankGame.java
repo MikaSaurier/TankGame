@@ -56,8 +56,8 @@ public class TankGame {
 		
 		Var.g1 = new Ground(0, 0, 64, Var.FrameWidth / 64, Var.FrameHeight / 64, Color.WHITE);
 		//Var.g1.setTexture("res/planks.png", "res/planks90.png");
-		Var.p1 = new Tank("Ernie", Var.FrameWidth/2 - 550, Var.FrameHeight / 2 - 12, 25, 0, Color.BLUE);
-		Var.p2 = new Tank("Bernd", Var.FrameWidth/2 + 550, Var.FrameHeight / 2 - 12, 25, Math.PI, Color.RED);
+		Var.p1 = new Tank("Ernie", Var.FrameWidth/2 - 550, Var.FrameHeight / 2 - 12, 25, 0, new Color(10, 250, 250));
+		Var.p2 = new Tank("Bernd", Var.FrameWidth/2 + 550, Var.FrameHeight / 2 - 12, 25, Math.PI, new Color(254, 1, 154));
 		
 		try {
 			Var.pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("res/coders_crux.ttf")).deriveFont(125f);
@@ -74,10 +74,10 @@ public class TankGame {
 		Var.gamepanel.getRenderables().add(Var.g1);
 		Var.gamepanel.getRenderables().add(Var.p2);
 		Var.gamepanel.getRenderables().add(Var.p1);
-		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth / 2 - 50, 0, 100, 360, Color.GREEN.darker()));
-		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth / 2 - 50, Var.FrameHeight - 360, 100, 360, Color.GREEN.darker()));
-		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth / 2 - 420, Var.FrameHeight/2 - 210, 42, 420, Color.BLUE.darker()));
-		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth / 2 + 420, Var.FrameHeight/2 - 210, 42, 420, Color.RED.darker()));
+		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth / 2 - 50, 0, 100, 360, new Color(255, 131, 0)));
+		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth / 2 - 50, Var.FrameHeight - 360, 100, 360, new Color(255, 131, 0)));
+		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth / 2 - 420, Var.FrameHeight/2 - 210, 42, 420, new Color(10, 250, 250).darker()));
+		Var.gamepanel.getWalls().add(new Wall(Var.FrameWidth / 2 + 420, Var.FrameHeight/2 - 210, 42, 420,  new Color(254, 1, 154).darker()));
 		//Var.gamepanel.getRenderables().add(Var.FPSCount);
 	}
 }
